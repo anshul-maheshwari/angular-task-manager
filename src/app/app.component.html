@@ -1,0 +1,6 @@
+<app-title (updateMaxTask)="onUpdateMaxTask($event)">
+  <h2>{{title}}</h2>
+  <input type="number" #maxNumberOfTasksRef />
+</app-title>
+
+  <app-list-tasks [maxNumberOfTasks]="maxNumberOfTasks"></app-list-tasks>

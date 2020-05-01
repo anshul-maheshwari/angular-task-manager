@@ -1,0 +1,4 @@
+<input type="text" [maxSpaces] = "0" appLettersWithSpacesOnly [(ngModel)]="title" #titleRef/>
+<input type="text" [maxSpaces] = "5" appLettersWithSpacesOnly  #description />
+<input type="text" [maxSpaces] = "2" appLettersWithSpacesOnly #assignedTo/>
+<button (click)="save(description.value)">Save</button><button (click)="delete()">Delete</button>

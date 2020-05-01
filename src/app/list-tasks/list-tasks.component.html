@@ -1,0 +1,12 @@
+<div>
+	<h3>List of Tasks </h3>
+	<div *ngFor="let task of tasks">
+		<app-add-task-form [data]="task" (updateTask)="updateTask($event)" (deleteTask)="deleteTask($event)"></app-add-task-form>
+	</div>
+</div>
+
+<br/>
+<br/>
+<button [ngStyle]="{'backgroundColor': !!tasks.length ? 'grey' : 'red'}"  (click)="clear()">Clear</button>&nbsp;&nbsp;&nbsp;<button [ngClass]="{'red': tasks?.length >= maxNumberOfTasks}" (click)="addTask()"> Add Task </button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button (click)="loadTasks()">Load Tasks</button>&nbsp;&nbsp;&nbsp;<button (click)="exportTasks()"> Export Tasks </button>

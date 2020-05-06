@@ -19,7 +19,7 @@ export class LettersWithSpacesOnlyDirective {
       this.textColor = 'blue';
     }
     let backgroundColor = 'white'; 
-     if(value.split(" ").length-1 > this.maxSpaces){
+     if(value.split(' ').length-1 > this.maxSpaces){
       backgroundColor = 'red';      
     }
     else {

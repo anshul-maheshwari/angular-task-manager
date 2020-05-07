@@ -7,10 +7,13 @@ import { LettersWithSpacesOnlyDirective } from './core/directives/letters-with-s
 import { ListTasksComponent } from './list-tasks/list-tasks.component';
 import { AddTaskFormComponent } from './list-tasks/add-task-form/add-task-form.component';
 import { TitleComponent } from './title/title.component';
+import { TasksService } from './core/Services/tasks.service';
+import { CommonService } from './core/Services/common.service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
   declarations: [ AppComponent, LettersWithSpacesOnlyDirective, ListTasksComponent, AddTaskFormComponent, TitleComponent ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers: [CommonService]
 })
 export class AppModule { }

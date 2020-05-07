@@ -1,7 +1,7 @@
 <div>
 	<h3>List of Tasks </h3>
-	<div *ngFor="let task of tasks">
-		<app-add-task-form [data]="task" (updateTask)="updateTask($event)" (deleteTask)="deleteTask($event)"></app-add-task-form>
+	<div *ngFor="let task of tasksService?.tasks">
+		<app-add-task-form [id]="task?.id"></app-add-task-form>
 	</div>
 </div>
 

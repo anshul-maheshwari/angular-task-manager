@@ -8,6 +8,7 @@ import {
   Input
 } from "@angular/core";
 import { ITask } from "../list-tasks.component";
+import { TasksService } from "../../core/Services/tasks.service";
 
 @Component({
   selector: "app-add-task-form",
@@ -15,18 +16,19 @@ import { ITask } from "../list-tasks.component";
   styleUrls: ["./add-task-form.component.css"]
 })
 export class AddTaskFormComponent implements OnInit {
-  constructor() {}
+  constructor(private tasksService: TasksService) {}
   @ViewChild("assignedTo", { static: true }) assignedToRef: ElementRef;
   @ViewChild("description", { static: true }) descriptionRef: ElementRef;
   @ViewChild("titleRef", { static: true }) titleRef: ElementRef;
-  title: string = '';
+  title: string = "";
 
-  @Input() data: ITask;
+  @Input() id: string;
 
-  @Output() deleteTask: EventEmitter<string> = new EventEmitter<string>();
-  @Output() updateTask: EventEmitter<ITask> = new EventEmitter<ITask>();
+  data: ITask;
 
   ngAfterViewInit() {
+    this.data = this.tasksService.getTask(this.id);
+
     if (this.data) {
       this.assignedToValue = this.data.assignedTo;
       this.titleValue = this.data.title;
@@ -49,7 +51,7 @@ export class AddTaskFormComponent implements OnInit {
 
   set titleValue(value: string) {
     if (this.titleRef) {
-     this.title =  this.titleRef.nativeElement.value = value || "";
+      this.title = this.titleRef.nativeElement.value = value || "";
     }
   }
 
@@ -60,19 +62,15 @@ export class AddTaskFormComponent implements OnInit {
   }
 
   save(des: string): void {
-    const updatedData: ITask = {
-      id: this.data.id,
+    this.tasksService.updateTask({
+      id: this.id,
       title: this.title,
       description: des,
       assignedTo: this.assignedToValue
-    };
-    console.log(updatedData);
-    this.updateTask.emit(updatedData);
+    });
   }
 
   delete(): void {
-    if (this.data) {
-      this.deleteTask.emit(this.data.id);
-    }
+    this.tasksService.deleteTask(this.id);
   }
 }

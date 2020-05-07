@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 
 import { from } from "rxjs";
+import { TasksService } from "../core/Services/tasks.service";
 
 export interface ITask {
   id?: string;
@@ -15,7 +16,7 @@ export interface ITask {
   styleUrls: ["./list-tasks.component.css"]
 })
 export class ListTasksComponent implements OnInit {
-  constructor() {}
+  constructor(private tasksService: TasksService) {}
   tasks: ITask[] = [];
   @Input() maxNumberOfTasks = 5;
   ngOnInit() {}
@@ -31,60 +32,40 @@ export class ListTasksComponent implements OnInit {
   }
 
   clear(): void {
-    this.tasks = [];
+    this.tasksService.clear();
+    // this.tasks = [];
   }
 
   addTask(): void {
     if (this.tasks.length < this.maxNumberOfTasks) {
-      this.tasks.push({
-        id: new Date().getTime() + '',
-        title: "Title",
-        description: "Description",
-        assignedTo: "AssignedTo"
-      });
+      this.tasksService.addNewTask();
+
+      // this.tasks.push({
+      //   id: new Date().getTime() + '',
+      //   title: "Title",
+      //   description: "Description",
+      //   assignedTo: "AssignedTo"
+      // });
     }
   }
 
   updateTask(data: ITask) {
-    if (data && data.id) {
-      const toUpdateData = (this.tasks || []).find(
-        fTask => (fTask.id === data.id)
-      );
-      if (toUpdateData) {
-        toUpdateData.title = data.title;
-        toUpdateData.assignedTo = data.assignedTo;
-        toUpdateData.description = data.description;
-      }
-    }
+    this.tasksService.updateTask(data);
   }
 
   deleteTask(id: string): void {
-    if (id) {
-      this.tasks = (this.tasks || []).filter(fTask => fTask.id !== id);
-    }
+    this.tasksService.deleteTask(id);
   }
 
   exportTasks(): void {
-    localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    this.tasksService.exportTasks();
   }
 
   loadTasks(): void {
-    try {
-      this.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-    } catch (e) {
-      this.tasks = [];
-    }
-    this.removeExtraTasks(this.maxNumberOfTasks);
+    this.tasksService.loadTasks();
   }
 
   private removeExtraTasks(size: number): void {
-    if(size < this.tasks.length) {
-    this.tasks.length = size;
-    }
-    // Note: Alternate
-    // const toRemove = this.tasks.length - size;
-    // if (toRemove > 0) {
-    //   this.tasks = this.tasks.splice(size - 1, toRemove);
-    // }
+    this.tasksService.removeExtraTasks(size);
   }
 }

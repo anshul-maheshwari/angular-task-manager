@@ -9,10 +9,19 @@ import { AddTaskFormComponent } from './list-tasks/add-task-form/add-task-form.c
 import { TitleComponent } from './title/title.component';
 import { TasksService } from './core/Services/tasks.service';
 import { CommonService } from './core/Services/common.service';
+import { TasksReadOnlyComponent } from './tasks-read-only/tasks-read-only.component';
+import { Route } from '@angular/compiler/src/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [
+  {path: '', component: TasksReadOnlyComponent},
+  {path: 'edit', component: ListTasksComponent},
+  {path: 'read', component: TasksReadOnlyComponent},
+];
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, LettersWithSpacesOnlyDirective, ListTasksComponent, AddTaskFormComponent, TitleComponent ],
+  imports:      [ BrowserModule, FormsModule, RouterModule.forRoot(routes) ],
+  declarations: [ AppComponent, LettersWithSpacesOnlyDirective, ListTasksComponent, AddTaskFormComponent, TitleComponent, TasksReadOnlyComponent ],
   bootstrap:    [ AppComponent ],
   providers: [CommonService]
 })

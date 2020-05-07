@@ -3,4 +3,14 @@
   <input type="number" #maxNumberOfTasksRef />
 </app-title>
 
-  <app-list-tasks [maxNumberOfTasks]="maxNumberOfTasks"></app-list-tasks>
+<button routerLink="edit">Edit</button>
+<button routerLink="read">Read</button>
+<a href="edit">Edit</a>
+<a href="read">Read</a>
+
+  <!-- <app-list-tasks [maxNumberOfTasks]="maxNumberOfTasks"></app-list-tasks> -->
+
+
+  <router-outlet></router-outlet>
+
+  <!-- <app-tasks-read-only></app-tasks-read-only> -->

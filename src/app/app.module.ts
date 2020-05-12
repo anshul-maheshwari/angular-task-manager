@@ -17,6 +17,7 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { CanEditGuard } from "./core/guards/can-edit.guard.service";
 import { CanLeaveEditGuard } from "./core/guards/can-leave-edit.guard.service";
 import { TaskResolver } from "./core/reolvers/task.resolver";
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { TaskResolver } from "./core/reolvers/task.resolver";
     AddTaskFormComponent,
     TitleComponent,
     TasksReadOnlyComponent,
-    ErrorComponent
+    ErrorComponent,
+    RegisterComponent
   ],
   bootstrap: [AppComponent],
   providers: [CommonService, CanEditGuard, CanLeaveEditGuard, TaskResolver]

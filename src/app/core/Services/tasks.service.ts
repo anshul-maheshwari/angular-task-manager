@@ -4,13 +4,15 @@ import {
 } from "../../list-tasks/list-tasks.component";
 import { CommonService } from "../Services/common.service";
 import { Injector, Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, BehaviorSubject, ReplaySubject } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class TasksService {
-  tasksSubject = new Subject<ITask[]>();
-
   tasks: ITask[] = [];
+  tasksSubject = new Subject<ITask[]>();
+  tasksBehaviourSubject = new BehaviorSubject<ITask[]>([...this.tasks]);
+  tasksReplySubject = new ReplaySubject<ITask[]>(2);
+
   constructor(private commonService: CommonService) {}
 
   addNewTask(): void {
@@ -32,6 +34,8 @@ export class TasksService {
         toUpdateData.description = data.description;
       }
       this.tasksSubject.next([...this.tasks]);
+      this.tasksBehaviourSubject.next([...this.tasks]);
+      this.tasksReplySubject.next([...this.tasks]);
     }
   }
 
@@ -40,6 +44,8 @@ export class TasksService {
       this.tasks = (this.tasks || []).filter(fTask => fTask.id !== id);
     }
     this.tasksSubject.next([...this.tasks]);
+    this.tasksBehaviourSubject.next([...this.tasks]);
+    this.tasksReplySubject.next([...this.tasks]);
   }
 
   exportTasks(): void {

@@ -9,6 +9,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { CanEditGuard } from "../core/guards/can-edit.guard.service";
 import { CanLeaveEditGuard } from "../core/guards/can-leave-edit.guard.service";
 import { TaskResolver } from "../core/reolvers/task.resolver";
+import { RegisterComponent } from "../register/register.component";
 
 const routes: Routes = [
   {
@@ -36,7 +37,7 @@ const routes: Routes = [
   {
     path: "register",
     data: { xyz: "In Progress" },
-    component: ErrorComponent
+    component: RegisterComponent
   },
   {
     path: "login",

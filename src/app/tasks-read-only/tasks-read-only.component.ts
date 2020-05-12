@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../core/Services/tasks.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tasks-read-only',
@@ -8,9 +9,13 @@ import { TasksService } from '../core/Services/tasks.service';
 })
 export class TasksReadOnlyComponent implements OnInit {
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
+
+onEdit ():void {
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
 }

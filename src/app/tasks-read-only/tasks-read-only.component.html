@@ -1,5 +1,19 @@
+<button routerLink="/edit">Edit</button>
+<br>
+<br>
+<br>
+<br>
 
 
-<p *ngFor="let task of tasksService?.tasks">
-tasks-read-only works!
+<p *ngFor="let task of tasksService?.tasks; let i = index">
+	{{task.title}} {{task.description}} {{task.assignedTo}}
+	<button
+[routerLink]="['/read', 'edit', task.id]"
+[queryParams]="{ editenabled: i%2}"
+[fragment]="'editscreen'+i"
+>Edit</button>
 </p>
+
+
+<br>
+<router-outlet></router-outlet>

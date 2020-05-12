@@ -1,4 +1,9 @@
-<input type="text" [maxSpaces] = "0" appLettersWithSpacesOnly [(ngModel)]="title" #titleRef/>
-<input type="text" [maxSpaces] = "5" appLettersWithSpacesOnly  #description />
-<input type="text" [maxSpaces] = "2" appLettersWithSpacesOnly #assignedTo/>
-<button (click)="save(description.value)">Save</button><button (click)="delete()">Delete</button>
+<div>
+	<br>
+
+	<br>
+	<input type="text" [disabled]="editable" [maxSpaces] = "0" appLettersWithSpacesOnly [(ngModel)]="title" #titleRef/>
+	<input type="text" [disabled]="editable" [maxSpaces] = "5" appLettersWithSpacesOnly  #description />
+	<input type="text" [disabled]="editable" [maxSpaces] = "2" appLettersWithSpacesOnly #assignedTo/>
+	<button [disabled]="editable" (click)="save(description.value)" [disabled]="editable" >Save</button><button (click)="delete()">Delete</button>
+</div>

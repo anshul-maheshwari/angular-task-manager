@@ -7,12 +7,14 @@ import { ErrorComponent } from "../error/error.component";
 
 import { Routes, RouterModule } from "@angular/router";
 import { CanEditGuard } from "../core/guards/can-edit.guard.service";
+import { CanLeaveEditGuard } from "../core/guards/can-leave-edit.guard.service";
 
 const routes: Routes = [
   {
     path: "edit/:xyz",
     component: AddTaskFormComponent,
-    canActivate: [CanEditGuard]
+    canActivate: [CanEditGuard],
+    canDeactivate: [CanLeaveEditGuard]
   },
   { path: "edit", component: ListTasksComponent },
   {
@@ -22,13 +24,24 @@ const routes: Routes = [
     children: [
       {
         path: "edit/:xyz",
-        component: AddTaskFormComponent
+        component: AddTaskFormComponent,
+        canDeactivate: [CanLeaveEditGuard]
       }
     ]
   },
   { path: "", redirectTo: "/read", pathMatch: "full" },
   {
+    path: "register",
+    data: { xyz: "In Progress" },
+    component: ErrorComponent
+  },
+  {
+    path: "login",
+    component: ErrorComponent
+  },
+  {
     path: "**",
+    data: { xyz: "Not Found" },
     component: ErrorComponent
   }
 ];
@@ -36,6 +49,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   declarations: [],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

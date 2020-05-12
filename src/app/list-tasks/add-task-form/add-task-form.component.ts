@@ -13,14 +13,15 @@ import { ActivatedRoute } from "@angular/router";
 
 import { ITask } from "../list-tasks.component";
 import { TasksService } from "../../core/Services/tasks.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
+import { canLeaveEditPage } from "../../core/guards/can-leave-edit.guard.service";
 
 @Component({
   selector: "app-add-task-form",
   templateUrl: "./add-task-form.component.html",
   styleUrls: ["./add-task-form.component.css"]
 })
-export class AddTaskFormComponent implements OnInit {
+export class AddTaskFormComponent implements OnInit, canLeaveEditPage {
   constructor(
     private tasksService: TasksService,
     private route: ActivatedRoute
@@ -119,6 +120,18 @@ export class AddTaskFormComponent implements OnInit {
     }
   }
 
+  get titleValue(): string {
+    if (this.titleRef) {
+      return this.titleRef.nativeElement.value;
+    }
+  }
+
+  get descriptionValue(): string {
+    if (this.descriptionRef) {
+      return this.descriptionRef.nativeElement.value;
+    }
+  }
+
   save(des: string): void {
     this.tasksService.updateTask({
       id: this.id,
@@ -128,7 +141,22 @@ export class AddTaskFormComponent implements OnInit {
     });
   }
 
+  get isUnsaved(): boolean {
+    return (
+      this.data.title !== this.titleValue ||
+      this.data.assignedTo !== this.assignedToValue ||
+      this.data.description !== this.descriptionValue
+    );
+  }
+
   delete(): void {
     this.tasksService.deleteTask(this.id);
+  }
+
+  xyz(): Observable<boolean> | Promise<boolean> | boolean {
+    if(this.data && this.isUnsaved) {
+      return confirm('Do you want to leave');
+    }
+    return true;
   }
 }

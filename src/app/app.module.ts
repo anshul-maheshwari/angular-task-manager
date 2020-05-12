@@ -15,6 +15,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { ErrorComponent } from "./error/error.component";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { CanEditGuard } from "./core/guards/can-edit.guard.service";
+import { CanLeaveEditGuard } from "./core/guards/can-leave-edit.guard.service";
 
 
 @NgModule({
@@ -29,6 +30,6 @@ import { CanEditGuard } from "./core/guards/can-edit.guard.service";
     ErrorComponent
   ],
   bootstrap: [AppComponent],
-  providers: [CommonService, CanEditGuard]
+  providers: [CommonService, CanEditGuard, CanLeaveEditGuard]
 })
 export class AppModule {}

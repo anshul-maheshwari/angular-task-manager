@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 
-import { from } from "rxjs";
+import { from, interval, Subscribable, Subscription } from "rxjs";
 import { TasksService } from "../core/Services/tasks.service";
 
 export interface ITask {
@@ -18,8 +18,18 @@ export interface ITask {
 export class ListTasksComponent implements OnInit {
   constructor(private tasksService: TasksService) {}
   tasks: ITask[] = [];
+  subscription: Subscription = new Subscription();
   @Input() maxNumberOfTasks = 5;
-  ngOnInit() {}
+
+  ngOnInit() {
+    const intervalObservable = interval(1000);
+
+    this.subscription.add(intervalObservable.subscribe(x => console.log(x)));
+    this.subscription.add(intervalObservable.subscribe(x => console.log(1, x)));
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     const maxNumberOfTasksChanges = simpleChanges["maxNumberOfTasks"];

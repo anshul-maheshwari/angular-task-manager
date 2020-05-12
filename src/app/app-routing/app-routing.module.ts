@@ -8,13 +8,15 @@ import { ErrorComponent } from "../error/error.component";
 import { Routes, RouterModule } from "@angular/router";
 import { CanEditGuard } from "../core/guards/can-edit.guard.service";
 import { CanLeaveEditGuard } from "../core/guards/can-leave-edit.guard.service";
+import { TaskResolver } from "../core/reolvers/task.resolver";
 
 const routes: Routes = [
   {
     path: "edit/:xyz",
     component: AddTaskFormComponent,
     canActivate: [CanEditGuard],
-    canDeactivate: [CanLeaveEditGuard]
+    canDeactivate: [CanLeaveEditGuard],
+    resolve: { pqr: TaskResolver }
   },
   { path: "edit", component: ListTasksComponent },
   {
@@ -25,7 +27,8 @@ const routes: Routes = [
       {
         path: "edit/:xyz",
         component: AddTaskFormComponent,
-        canDeactivate: [CanLeaveEditGuard]
+        canDeactivate: [CanLeaveEditGuard],
+        resolve: { pqr: TaskResolver }
       }
     ]
   },
@@ -47,7 +50,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: false})],
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
   declarations: [],
   exports: [RouterModule]
 })

@@ -50,8 +50,10 @@ export class AddTaskFormComponent implements OnInit, canLeaveEditPage {
     }
   }
 
-  private populteData(): void {
-    this.data = this.tasksService.getTask(this.id);
+  private populteData(skipFetching = false): void {
+    if (!skipFetching) {
+      this.data = this.tasksService.getTask(this.id);
+    }
 
     if (this.data) {
       this.assignedToValue = this.data.assignedTo;
@@ -64,14 +66,21 @@ export class AddTaskFormComponent implements OnInit, canLeaveEditPage {
 
   ngOnInit() {
     console.log("Comp Created");
+    // this.subscription.add(
+    //   this.route.params.subscribe(param => {
+    //     const idParam = param["xyz"];
+    //     console.log(idParam);
+    //     if (idParam) {
+    //       this.id = idParam;
+    //     }
+    //     this.populteData();
+    //   })
+    // );
+
     this.subscription.add(
-      this.route.params.subscribe(param => {
-        const idParam = param["xyz"];
-        console.log(idParam);
-        if (idParam) {
-          this.id = idParam;
-        }
-        this.populteData();
+      this.route.data.subscribe(resolverData => {
+        this.data = resolverData["pqr"];
+        this.populteData(true);
       })
     );
 
@@ -154,8 +163,8 @@ export class AddTaskFormComponent implements OnInit, canLeaveEditPage {
   }
 
   xyz(): Observable<boolean> | Promise<boolean> | boolean {
-    if(this.data && this.isUnsaved) {
-      return confirm('Do you want to leave');
+    if (this.data && this.isUnsaved) {
+      return confirm("Do you want to leave");
     }
     return true;
   }

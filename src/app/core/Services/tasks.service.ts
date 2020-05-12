@@ -1,9 +1,15 @@
-import { ITask, ListTasksComponent } from "../../list-tasks/list-tasks.component";
+import {
+  ITask,
+  ListTasksComponent
+} from "../../list-tasks/list-tasks.component";
 import { CommonService } from "../Services/common.service";
 import { Injector, Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: "root" })
 export class TasksService {
+  tasksSubject = new Subject<ITask[]>();
+
   tasks: ITask[] = [];
   constructor(private commonService: CommonService) {}
 
@@ -25,7 +31,7 @@ export class TasksService {
         toUpdateData.assignedTo = data.assignedTo;
         toUpdateData.description = data.description;
       }
-      console.log(this.commonService.toString(data));
+      this.tasksSubject.next([...this.tasks]);
     }
   }
 
@@ -33,6 +39,7 @@ export class TasksService {
     if (id) {
       this.tasks = (this.tasks || []).filter(fTask => fTask.id !== id);
     }
+    this.tasksSubject.next([...this.tasks]);
   }
 
   exportTasks(): void {

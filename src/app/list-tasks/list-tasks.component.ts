@@ -22,10 +22,13 @@ export class ListTasksComponent implements OnInit {
   @Input() maxNumberOfTasks = 5;
 
   ngOnInit() {
-    const intervalObservable = interval(1000);
+    this.subscription.add(
+      this.tasksService.tasksSubject.subscribe(val => console.log(val))
+    );
+    // const intervalObservable = interval(1000);
 
-    this.subscription.add(intervalObservable.subscribe(x => console.log(x)));
-    this.subscription.add(intervalObservable.subscribe(x => console.log(1, x)));
+    // this.subscription.add(intervalObservable.subscribe(x => console.log(x)));
+    // this.subscription.add(intervalObservable.subscribe(x => console.log(1, x)));
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

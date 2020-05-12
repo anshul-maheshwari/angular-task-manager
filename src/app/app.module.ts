@@ -12,29 +12,23 @@ import { CommonService } from "./core/Services/common.service";
 import { TasksReadOnlyComponent } from "./tasks-read-only/tasks-read-only.component";
 import { Route } from "@angular/compiler/src/core";
 import { Routes, RouterModule } from "@angular/router";
+import { ErrorComponent } from "./error/error.component";
+import { AppRoutingModule } from "./app-routing/app-routing.module";
+import { CanEditGuard } from "./core/guards/can-edit.guard.service";
 
-const routes: Routes = [
-  { path: "", component: TasksReadOnlyComponent,  },
-  { path: "edit", component: ListTasksComponent,  },
-  { path: "edit/:xyz", component: AddTaskFormComponent,  },
-  {
-    path: "read",
-    component: TasksReadOnlyComponent,
-    children: [{ path: "edit/:xyz", component: AddTaskFormComponent }]
-  }
-];
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, FormsModule,AppRoutingModule ],
   declarations: [
     AppComponent,
     LettersWithSpacesOnlyDirective,
     ListTasksComponent,
     AddTaskFormComponent,
     TitleComponent,
-    TasksReadOnlyComponent
+    TasksReadOnlyComponent,
+    ErrorComponent
   ],
   bootstrap: [AppComponent],
-  providers: [CommonService]
+  providers: [CommonService, CanEditGuard]
 })
 export class AppModule {}

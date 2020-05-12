@@ -11,7 +11,16 @@
 [routerLink]="['/read', 'edit', task.id]"
 [queryParams]="{ editenabled: i%2}"
 [fragment]="'editscreen'+i"
->Edit</button>
+>Edit Here</button>
+	&nbsp;
+	&nbsp;
+	&nbsp;
+	&nbsp;
+
+	<button
+  (click)="navigateEditScrren(task.id)"
+>Edit </button>
+
 </p>
 
 

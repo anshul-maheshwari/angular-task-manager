@@ -21,8 +21,8 @@ export class RegisterReactiveComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.registerForm.statusChanges.subscribe(console.log);
-    this.registerForm.valueChanges.subscribe(console.log);
+    this.registerForm.statusChanges.subscribe(status => console.log(status));
+    this.registerForm.valueChanges.subscribe(value => console.log(value));
   }
 
   get ageControl(): AbstractControl {

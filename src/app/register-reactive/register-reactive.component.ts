@@ -64,7 +64,6 @@ export class RegisterReactiveComponent implements OnInit {
       email: new FormControl(
         "defaul email",
         [Validators.required, Validators.email],
-        this.customPhoneDuplicateValidator
       ),
       phone: new FormArray([])
     });

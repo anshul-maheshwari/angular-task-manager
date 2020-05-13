@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 import { LettersWithSpacesOnlyDirective } from "./core/directives/letters-with-spaces-only.directive";
@@ -17,11 +17,11 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { CanEditGuard } from "./core/guards/can-edit.guard.service";
 import { CanLeaveEditGuard } from "./core/guards/can-leave-edit.guard.service";
 import { TaskResolver } from "./core/reolvers/task.resolver";
-import { RegisterComponent } from './register/register.component';
-
+import { RegisterComponent } from "./register/register.component";
+import { RegisterReactiveComponent } from "./register-reactive/register-reactive.component";
 
 @NgModule({
-  imports: [BrowserModule, FormsModule,AppRoutingModule ],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   declarations: [
     AppComponent,
     LettersWithSpacesOnlyDirective,
@@ -30,7 +30,8 @@ import { RegisterComponent } from './register/register.component';
     TitleComponent,
     TasksReadOnlyComponent,
     ErrorComponent,
-    RegisterComponent
+    RegisterComponent,
+    RegisterReactiveComponent
   ],
   bootstrap: [AppComponent],
   providers: [CommonService, CanEditGuard, CanLeaveEditGuard, TaskResolver]

@@ -1,0 +1,41 @@
+<form [formGroup]="registerForm" (ngSubmit)="submit()">
+	
+  <div [formGroupName]="'name'">
+    First Name : <input
+              [formControlName]="'fname'" type="text" /> <br>
+    Last Name : <input
+              [formControlName]="'lname'" type="text" /> <br>
+  </div>
+
+
+  Age : <input
+            [formControlName]="'age'" type="number" /> <br>
+
+          <span *ngIf="ageControl?.errors?.required">* Required</span> <br>
+          <span *ngIf="ageControl?.errors?.max">
+             Max can be {{registerForm.get('age')?.errors?.max.max}}</span> <br>
+          <span *ngIf="ageControl?.errors?.min" >
+            Min can be {{registerForm.get('age')?.errors?.min.min}}</span> <br>
+
+
+
+  Email : <input
+            [formControlName]="'email'" type="email" /> <br>
+
+	<button type="button" (click)="addPhoneControl()">Add Phone</button> <br>
+  <div [formArrayName]="'phone'" *ngFor="let phoneCtl of phoneControl?.controls; let i = index">
+  Phone : <input
+            [formControlName]="i" type="text" />
+          <button (click)="removePhoneControl(i)">---</button><br>
+
+  </div>
+
+
+
+
+
+	<br><br>
+	<button type="submit" >Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button type="button">Default</button><br> <br>
+	<button type="button">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</form>

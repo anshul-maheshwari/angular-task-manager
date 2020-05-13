@@ -29,20 +29,20 @@ export class AppComponent {
       setTimeout(() => observer.error("fdjfalsk"), 5000);
     });
 
-    intervalObservable
-      .pipe(
-        catchError(() => {
-          return of(50);
-        }),
-        filter((num: number) => Math.random() > 0.5),
-        map(data => {
-          return { d: data };
-        }),
-      )
-      .subscribe(
-        x => console.log(x),
-        z => console.log("error", z),
-        y => console.log("complet", y)
-      );
+    // intervalObservable
+    //   .pipe(
+    //     catchError(() => {
+    //       return of(50);
+    //     }),
+    //     filter((num: number) => Math.random() > 0.5),
+    //     map(data => {
+    //       return { d: data };
+    //     }),
+    //   )
+    //   .subscribe(
+    //     x => console.log(x),
+    //     z => console.log("error", z),
+    //     y => console.log("complet", y)
+    //   );
   }
 }

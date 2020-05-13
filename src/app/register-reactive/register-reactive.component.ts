@@ -61,10 +61,10 @@ export class RegisterReactiveComponent implements OnInit {
         Validators.min(0),
         Validators.max(90)
       ]),
-      email: new FormControl(
-        "defaul email",
-        [Validators.required, Validators.email],
-      ),
+      email: new FormControl("defaul email", [
+        Validators.required,
+        Validators.email
+      ]),
       phone: new FormArray([])
     });
   }
@@ -84,23 +84,21 @@ export class RegisterReactiveComponent implements OnInit {
     return { phone: true };
   }
 
-  
-
   customPhoneDuplicateValidator(
     control: AbstractControl
   ): Observable<ValidationErrors | null> {
-    console.log("jh");
-    const sub = new Subject<ValidationErrors | null>();
-    const value = control.value || "";
-    if (
-      this.phoneControl.controls
-        .map(control => control.value)
-        .filter(val => (val = value)).length > 1
-    ) {
-      setTimeout(() => sub.next({ duplicatePhone: true }), 3000);
-    } else {
-      setTimeout(() => sub.next(null), 3000);
-    }
-    return sub;
+    return Observable.create(observer => {
+      const value = control.value || "";
+      if (
+        this.phoneControl.controls
+          .map(control => control.value)
+          .filter(val => (val = value)).length > 1
+      ) {
+        setTimeout(() => observer.next({ duplicatePhone: true }), 3000);
+      } else {
+        setTimeout(() => observer.next(null), 3000);
+      }
+      setTimeout(() => observer.complete(), 3001);
+    });
   }
 }

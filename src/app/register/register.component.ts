@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormGroup, NgModelGroup } from "@angular/forms";
 
 @Component({
   selector: "app-register",
@@ -10,6 +10,7 @@ export class RegisterComponent implements OnInit {
   constructor() {}
 
   @ViewChild("registerForm") registerFormRef: NgForm;
+  @ViewChild("nameGroupRef") nameGroupRef: NgModelGroup;
 
   ngOnInit() {}
 
@@ -18,10 +19,27 @@ export class RegisterComponent implements OnInit {
   }
 
   setDefault(): void {
-    this.registerFormRef.setValue({ name: "Anshul", age: 90, email: "fdfd" });
+    this.registerFormRef.form.patchValue({
+      name: { fname: "Anshul", lname: "Maheshwari" },
+      age: 90,
+      email: "fdfd",
+      underAged: "yes"
+    });
+
+    (this.registerFormRef.controls["name"] as FormGroup).controls[
+      "lname"
+    ].setValue("no");
   }
 
   submit(): void {
     console.log(this.registerFormRef);
+    // console.log(this.nameGroupRef);
+  }
+
+  resetForm(): void {
+    this.registerFormRef.resetForm();
+  }
+  resetNameForm(): void {
+    this.nameGroupRef.reset();
   }
 }

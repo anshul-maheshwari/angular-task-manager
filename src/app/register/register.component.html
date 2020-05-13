@@ -1,8 +1,35 @@
 <h3>Register User</h3>
 <form #registerForm="ngForm" (ngSubmit)="submit()">
-	Name :<input type="text" name="name" required [ngModel]="'Default Name'" />
-  Age : <input type="number" name="age" ngModel/>
-  Email :<input type="email" name="email" required email ngModel />
-	<button [disabled]="!registerForm.valid" type="submit">Submit</button>
-	<button type="button" (click)="setDefault()">Default</button>
+	<div #nameGroupRef="ngModelGroup" ngModelGroup="name">
+		First Name :<input type="text" name="fname" required [ngModel]="'Default Name'" #nameRef="ngModel" />
+		<br>
+Last Name :<input type="text" name="lname" required [ngModel]="'Default Name'" #nameRef="ngModel" /> <br>
+
+</div>
+
+		below 18
+		<input type="radio" name="underAged"
+     value="yes" #underAgedRef="ngModel" ngModel/>
+Yes
+		<input type="radio" name="underAged"
+     value="no" #underAgedRef="ngModel" [ngModel]="'no'"/>
+No
+		<br>
+		<div *ngIf="underAgedRef.value === 'yes'">
+			Age :
+			<input type="number" name="age" ngModel/><br>
+
+</div>
+
+			Email :
+			<input type="email" name="email" required email ngModel #emailRef="ngModel" /><br>
+
+
+
+
+			<button  type="submit">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" (click)="setDefault()">Default</button>
+			<br>
+			<button (click)="resetForm()">Clear</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  (click)="resetNameForm()">Clear Name</button>
 </form>

@@ -19,14 +19,22 @@ import { CanLeaveEditGuard } from "./core/guards/can-leave-edit.guard.service";
 import { TaskResolver } from "./core/reolvers/task.resolver";
 import { RegisterComponent } from "./register/register.component";
 import { RegisterReactiveComponent } from "./register-reactive/register-reactive.component";
-import { TodoComponent } from './todo/todo.component';
+import { TodoComponent } from "./todo/todo.component";
 import { ShorterPipe } from "./core/pipes/shorter.pipe";
 import { SortPipe } from "./core/pipes/sort.pipe";
-import { HttpClientModule } from "@angular/common/http";
-import { UsersComponent } from './users/users.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { UsersComponent } from "./users/users.component";
+import { RequestInterceptor } from "./core/interceptors/request.interceptor";
+import { ResponseInterceptor } from "./core/interceptors/response.interceptor";
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
   declarations: [
     AppComponent,
     LettersWithSpacesOnlyDirective,
@@ -43,6 +51,14 @@ import { UsersComponent } from './users/users.component';
     UsersComponent
   ],
   bootstrap: [AppComponent],
-  providers: [CommonService, CanEditGuard, CanLeaveEditGuard, TaskResolver]
+  providers: [
+    CommonService,
+    CanEditGuard,
+    CanLeaveEditGuard,
+    TaskResolver,
+
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }
+  ]
 })
 export class AppModule {}

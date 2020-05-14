@@ -32,7 +32,7 @@ export class UsersDao {
           .set("param2", "2")
           .set("param2", "10")
           .set("delay", delayedBy),
-          responseType: "json"
+        responseType: "json"
       })
       .pipe(
         tap(res => console.log(res)),

@@ -23,7 +23,7 @@
             [formControlName]="'email'" type="email" /> <br>
 
 	<button type="button" (click)="addPhoneControl()">Add Phone</button> <br>
-  <div [formArrayName]="'phone'" *ngFor="let phoneCtl of phoneControl?.controls; let i = index">
+  <div [formArrayName]="'phone'" *ngFor="let phoneCtl of phoneControls; let i = index">
   Phone : <input
             [formControlName]="i" type="text" />
           <button (click)="removePhoneControl(i)">---</button><br>

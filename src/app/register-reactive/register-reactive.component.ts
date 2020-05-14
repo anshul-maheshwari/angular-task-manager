@@ -35,6 +35,10 @@ export class RegisterReactiveComponent implements OnInit {
     return this.registerForm.get("phone") as FormArray;
   }
 
+  get phoneControls(): AbstractControl[] {
+    return this.phoneControl ? [] : this.phoneControl.controls;
+  }
+
   addPhoneControl(): void {
     this.phoneControl.controls.push(
       new FormControl(

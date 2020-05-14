@@ -25,9 +25,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(delayedBy: string) {
-    this.usersDao
-      .getUsersListDelayed(delayedBy)
-      .subscribe();
+    this.usersDao.getUsersListDelayed(delayedBy).subscribe();
   }
 
   getUser(id: string): void {

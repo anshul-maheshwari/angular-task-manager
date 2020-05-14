@@ -11,6 +11,7 @@ import { CanLeaveEditGuard } from "../core/guards/can-leave-edit.guard.service";
 import { TaskResolver } from "../core/reolvers/task.resolver";
 import { RegisterComponent } from "../register/register.component";
 import { RegisterReactiveComponent } from "../register-reactive/register-reactive.component";
+import { TodoComponent } from "../todo/todo.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: "register/reactive",
     component: RegisterReactiveComponent
+  },
+  {
+    path: "todo",
+    component: TodoComponent
   },
   {
     path: "login",

@@ -19,6 +19,7 @@ import { CanLeaveEditGuard } from "./core/guards/can-leave-edit.guard.service";
 import { TaskResolver } from "./core/reolvers/task.resolver";
 import { RegisterComponent } from "./register/register.component";
 import { RegisterReactiveComponent } from "./register-reactive/register-reactive.component";
+import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
@@ -31,7 +32,8 @@ import { RegisterReactiveComponent } from "./register-reactive/register-reactive
     TasksReadOnlyComponent,
     ErrorComponent,
     RegisterComponent,
-    RegisterReactiveComponent
+    RegisterReactiveComponent,
+    TodoComponent
   ],
   bootstrap: [AppComponent],
   providers: [CommonService, CanEditGuard, CanLeaveEditGuard, TaskResolver]

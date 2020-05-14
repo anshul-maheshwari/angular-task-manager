@@ -1,0 +1,11 @@
+Todo : <input type="text" [(ngModel)] ="todo"> &nbsp; &nbsp;
+Date : <input type="Date" [(ngModel)] ="todoDate"> &nbsp; &nbsp;
+<button type="button" (click)="add()" >Add</button>
+
+<br><br><br><br>
+<h4> Todo </h4>
+<div *ngFor="let td of todos;let i = index">
+	{{ td.todo | lowercase}}
+  &nbsp;|&nbsp;
+	{{td.todoDate | date | lowercase}}
+</div>

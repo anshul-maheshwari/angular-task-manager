@@ -27,7 +27,9 @@ No
 
 
 
-			<button  type="submit">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  type="submit" [disabled]="addUserRequestPending">
+        {{ addUserRequestPending?  'loading' : 'Submit' }}
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="button" (click)="setDefault()">Default</button>
 			<br>
 			<button (click)="resetForm()">Clear</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

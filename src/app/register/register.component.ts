@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm, FormGroup, NgModelGroup } from "@angular/forms";
 import { UsersDao } from "../core/dao/users.dao";
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: "app-register",
@@ -12,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   @ViewChild("registerForm") registerFormRef: NgForm;
   @ViewChild("nameGroupRef") nameGroupRef: NgModelGroup;
+  addUserRequestPending = false;
 
   ngOnInit() {}
 
@@ -33,12 +35,18 @@ export class RegisterComponent implements OnInit {
   }
 
   submit(): void {
+    if (this.addUserRequestPending) {
+      return;
+    }
+    this.addUserRequestPending = true;
     this.usersDao
       .addUser({
         email: this.registerFormRef.value.email,
         first_name: this.registerFormRef.value.name.fname,
         last_name: this.registerFormRef.value.name.lname
-      }).subscribe();
+      })
+      .pipe(finalize(() => (this.addUserRequestPending = false)))
+      .subscribe();
 
     this.resetForm();
   }

@@ -25,4 +25,8 @@ export class UsersDao {
   addUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(UsersDao.baseUrl + "api/users", user);
   }
+
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete<any>(UsersDao.baseUrl + `api/users/${id}`);
+  }
 }

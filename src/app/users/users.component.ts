@@ -18,4 +18,9 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.usersDao.getUsersList().subscribe(res => (this.users = res));
   }
+
+
+  delete(id: string):void {
+    this.usersDao.deleteUser(id).subscribe();
+  }
 }

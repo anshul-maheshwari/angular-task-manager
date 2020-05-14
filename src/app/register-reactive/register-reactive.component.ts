@@ -8,6 +8,7 @@ import {
   ValidationErrors
 } from "@angular/forms";
 import { Observable, Subject } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: "app-register-reactive",
@@ -92,13 +93,13 @@ export class RegisterReactiveComponent implements OnInit {
       if (
         this.phoneControl.controls
           .map(control => control.value)
-          .filter(val => (val === value)).length > 1
+          .filter(val => val === value).length > 1
       ) {
         setTimeout(() => observer.next({ duplicatePhone: true }), 3000);
       } else {
         setTimeout(() => observer.next(null), 3000);
       }
       setTimeout(() => observer.complete(), 3001);
-    });
+    }).pipe(debounceTime(500));
   }
 }

@@ -20,9 +20,13 @@ import { TaskResolver } from "./core/reolvers/task.resolver";
 import { RegisterComponent } from "./register/register.component";
 import { RegisterReactiveComponent } from "./register-reactive/register-reactive.component";
 import { TodoComponent } from './todo/todo.component';
+import { ShorterPipe } from "./core/pipes/shorter.pipe";
+import { SortPipe } from "./core/pipes/sort.pipe";
+import { HttpClientModule } from "@angular/common/http";
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule, HttpClientModule],
   declarations: [
     AppComponent,
     LettersWithSpacesOnlyDirective,
@@ -33,7 +37,10 @@ import { TodoComponent } from './todo/todo.component';
     ErrorComponent,
     RegisterComponent,
     RegisterReactiveComponent,
-    TodoComponent
+    TodoComponent,
+    ShorterPipe,
+    SortPipe,
+    UsersComponent
   ],
   bootstrap: [AppComponent],
   providers: [CommonService, CanEditGuard, CanLeaveEditGuard, TaskResolver]

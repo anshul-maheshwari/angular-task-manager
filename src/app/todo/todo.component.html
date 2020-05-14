@@ -4,8 +4,12 @@ Date : <input type="Date" [(ngModel)] ="todoDate"> &nbsp; &nbsp;
 
 <br><br><br><br>
 <h4> Todo </h4>
-<div *ngFor="let td of todos;let i = index">
-	{{ td.todo | lowercase}}
-  &nbsp;|&nbsp;
-	{{td.todoDate | date | lowercase}}
+<div *ngFor="let td of todos | sortData:'todo';let i = index">
+	{{ td.todo | lowercase | shorter:6:true}}
+	&nbsp;|&nbsp;
+	{{td.todoDate | date | shorter:10:true | lowercase}}
 </div>
+
+
+<br><br><br><br>
+{{ subject| async}}

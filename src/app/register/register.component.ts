@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm, FormGroup, NgModelGroup } from "@angular/forms";
+import { UsersDao } from "../core/dao/users.dao";
 
 @Component({
   selector: "app-register",
@@ -7,7 +8,7 @@ import { NgForm, FormGroup, NgModelGroup } from "@angular/forms";
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
-  constructor() {}
+  constructor(private usersDao: UsersDao) {}
 
   @ViewChild("registerForm") registerFormRef: NgForm;
   @ViewChild("nameGroupRef") nameGroupRef: NgModelGroup;
@@ -32,8 +33,14 @@ export class RegisterComponent implements OnInit {
   }
 
   submit(): void {
-    console.log(this.registerFormRef);
-    // console.log(this.nameGroupRef);
+    this.usersDao
+      .addUser({
+        email: this.registerFormRef.value.email,
+        first_name: this.registerFormRef.value.name.fname,
+        last_name: this.registerFormRef.value.name.lname
+      }).subscribe();
+
+    this.resetForm();
   }
 
   resetForm(): void {

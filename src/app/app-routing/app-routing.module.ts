@@ -12,6 +12,7 @@ import { TaskResolver } from "../core/reolvers/task.resolver";
 import { RegisterComponent } from "../register/register.component";
 import { RegisterReactiveComponent } from "../register-reactive/register-reactive.component";
 import { TodoComponent } from "../todo/todo.component";
+import { UsersComponent } from "../users/users.component";
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: "todo",
     component: TodoComponent
+  },
+  {
+    path: "users",
+    component: UsersComponent
   },
   {
     path: "login",

@@ -9,6 +9,7 @@ import { IUser } from "../core/dao/users.dao";
 })
 export class UsersComponent implements OnInit {
   users: IUser[] = [];
+  user: IUser;
   constructor(private usersDao: UsersDao) {}
 
   get firstNames(): string[] {
@@ -19,8 +20,21 @@ export class UsersComponent implements OnInit {
     this.usersDao.getUsersList().subscribe(res => (this.users = res));
   }
 
-
-  delete(id: string):void {
+  delete(id: string): void {
     this.usersDao.deleteUser(id).subscribe();
+  }
+
+  getUser(id: string): void {
+    this.usersDao.getUser(id).subscribe(
+      res => {
+        console.log(res);
+        this.user = res;
+      },
+      err => {
+        alert("Error Block ");
+        console.log(err);
+        this.user = null;
+      }
+    );
   }
 }

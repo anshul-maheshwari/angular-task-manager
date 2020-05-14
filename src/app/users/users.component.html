@@ -6,3 +6,11 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	<button (click)="delete(user.id)">---</button>
 </div>
+
+<br><br><br><br><br>
+Id : <input type="number" #idRef> &nbsp;&nbsp;&nbsp;
+<button (click)="getUser(idRef.value)">Get</button>
+<h2>{{
+
+    user?.first_name
+}}</h2>

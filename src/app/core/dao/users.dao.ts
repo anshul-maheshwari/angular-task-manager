@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable, of, throwError } from "rxjs";
+import { map, catchError } from "rxjs/operators";
 
 export interface IUser {
   id?: number;
@@ -28,5 +28,18 @@ export class UsersDao {
 
   deleteUser(id: string): Observable<any> {
     return this.http.delete<any>(UsersDao.baseUrl + `api/users/${id}`);
+  }
+
+  getUser(id: string): Observable<any> {
+    return this.http
+      .get<{ data: IUser }>(UsersDao.baseUrl + `api/users/${id}`)
+      .pipe(map(res => res.data),
+      catchError(err => {
+        if(err.status === 404) {
+          alert('User not found');
+        }
+
+        return of(null);
+      }));
   }
 }

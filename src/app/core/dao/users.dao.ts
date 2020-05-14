@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import { map, catchError, tap } from "rxjs/operators";
 
 export interface IUser {
   id?: number;
@@ -22,6 +22,25 @@ export class UsersDao {
       .pipe(map(res => res.data || []));
   }
 
+  getUsersListDelayed(delayedBy: string): Observable<IUser[]> {
+    const param = new HttpParams();
+    return this.http
+      .get<{ data: IUser[] }>(
+        UsersDao.baseUrl + "api/users?delay=" + delayedBy,
+        {
+          params: param
+            .append("param1", "1")
+            .append("param1", "2")
+            .set("param2", "2"),
+          observe: "response"
+        }
+      )
+      .pipe(
+        tap(res => console.log(res)),
+        map(res => res.body.data || [])
+      );
+  }
+
   addUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(UsersDao.baseUrl + "api/users", user);
   }
@@ -31,15 +50,24 @@ export class UsersDao {
   }
 
   getUser(id: string): Observable<any> {
+    const header = new HttpHeaders({
+      header1: "1",
+      header2: "2",
+      header3: "2"
+    });
     return this.http
-      .get<{ data: IUser }>(UsersDao.baseUrl + `api/users/${id}`)
-      .pipe(map(res => res.data),
-      catchError(err => {
-        if(err.status === 404) {
-          alert('User not found');
-        }
+      .get<{ data: IUser }>(UsersDao.baseUrl + `api/users/${id}`, {
+        headers: header.set("header1", "11").append("header2", "22")
+      })
+      .pipe(
+        map(res => res.data),
+        catchError(err => {
+          if (err.status === 404) {
+            alert("User not found");
+          }
 
-        return of(null);
-      }));
+          return of(null);
+        })
+      );
   }
 }

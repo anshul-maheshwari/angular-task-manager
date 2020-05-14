@@ -24,6 +24,12 @@ export class UsersComponent implements OnInit {
     this.usersDao.deleteUser(id).subscribe();
   }
 
+  getUsers(delayedBy: string) {
+    this.usersDao
+      .getUsersListDelayed(delayedBy)
+      .subscribe();
+  }
+
   getUser(id: string): void {
     this.usersDao.getUser(id).subscribe(
       res => {

@@ -1,3 +1,7 @@
+Delay by : <input type="number" #delayByRef> &nbsp;&nbsp;&nbsp;
+<button (click)="getUsers(delayByRef.value)">Get</button>
+<br><br>
+
 <div *ngFor="let user of users;let i = index">
 	{{
     user?.first_name

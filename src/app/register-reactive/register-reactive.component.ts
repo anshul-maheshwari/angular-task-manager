@@ -92,7 +92,7 @@ export class RegisterReactiveComponent implements OnInit {
       if (
         this.phoneControl.controls
           .map(control => control.value)
-          .filter(val => (val = value)).length > 1
+          .filter(val => (val === value)).length > 1
       ) {
         setTimeout(() => observer.next({ duplicatePhone: true }), 3000);
       } else {

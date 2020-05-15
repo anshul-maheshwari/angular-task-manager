@@ -42,10 +42,6 @@ const routes: Routes = [
     component: TodoComponent
   },
   {
-    path: "users",
-    component: UsersComponent
-  },
-  {
     path: "login",
     component: ErrorComponent
   },

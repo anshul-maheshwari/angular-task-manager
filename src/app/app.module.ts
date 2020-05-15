@@ -27,15 +27,17 @@ import { UsersComponent } from "./users/users.component";
 import { RequestInterceptor } from "./core/interceptors/request.interceptor";
 import { ResponseInterceptor } from "./core/interceptors/response.interceptor";
 import { RegistrationModule } from "./registration/app-registration.module";
+import { UserModule } from "./user/app-user.module";
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     HttpClientModule,
-    RegistrationModule
+    RegistrationModule,
+    UserModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -48,8 +50,7 @@ import { RegistrationModule } from "./registration/app-registration.module";
 
     TodoComponent,
     ShorterPipe,
-    SortPipe,
-    UsersComponent
+    SortPipe
   ],
   bootstrap: [AppComponent],
   providers: [

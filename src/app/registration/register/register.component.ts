@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm, FormGroup, NgModelGroup } from "@angular/forms";
-import { UsersDao } from "../core/dao/users.dao";
 import { finalize } from "rxjs/operators";
+import { UsersDao } from "../../core/dao/users.dao";
 
 @Component({
   selector: "app-register",

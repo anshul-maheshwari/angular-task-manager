@@ -26,6 +26,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { UsersComponent } from "./users/users.component";
 import { RequestInterceptor } from "./core/interceptors/request.interceptor";
 import { ResponseInterceptor } from "./core/interceptors/response.interceptor";
+import { RegistrationModule } from "./registration/app-registration.module";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ResponseInterceptor } from "./core/interceptors/response.interceptor";
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RegistrationModule
   ],
   declarations: [
     AppComponent,
@@ -43,8 +45,7 @@ import { ResponseInterceptor } from "./core/interceptors/response.interceptor";
     TitleComponent,
     TasksReadOnlyComponent,
     ErrorComponent,
-    RegisterComponent,
-    RegisterReactiveComponent,
+
     TodoComponent,
     ShorterPipe,
     SortPipe,

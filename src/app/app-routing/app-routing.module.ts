@@ -38,15 +38,6 @@ const routes: Routes = [
   },
   { path: "", redirectTo: "/read", pathMatch: "full" },
   {
-    path: "register",
-    data: { xyz: "In Progress" },
-    component: RegisterComponent
-  },
-  {
-    path: "register/reactive",
-    component: RegisterReactiveComponent
-  },
-  {
     path: "todo",
     component: TodoComponent
   },
@@ -66,7 +57,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: false })],
+  imports: [RouterModule.forRoot(routes)],
   declarations: [],
   exports: [RouterModule]
 })
